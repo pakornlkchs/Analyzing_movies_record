@@ -37,7 +37,7 @@ WHERE title IN (
 ORDER BY title;
 -- [the result shows that only Jurassic Park III has quite the same detail.]
 
--- After searching in internet, the correct data might be the one with 5.9 rating so I will remove Jurassic Park III with movieid = 99
+-- After searching on the internet, the correct data might be the one with 5.9 rating so I will remove Jurassic Park III with movieid = 99
 DELETE FROM movies
 WHERE movieid = 99;
 
