@@ -12,9 +12,9 @@ FROM actor
 LIMIT 100;
 
 -- find if there are any duplicated movie that might skew our further analysis
-SELECT
-	*,
-    COUNT(title) AS total
+SELECT 
+	title,
+    	COUNT(title) AS total
 FROM movies
 GROUP BY title 
 HAVING total > 1;
