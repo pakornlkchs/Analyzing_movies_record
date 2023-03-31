@@ -18,7 +18,7 @@ SELECT
 FROM movies
 GROUP BY title 
 HAVING total > 1;
--- [there are 8 movies that appeared more than 1 times.]
+-- [there are 8 movies that appeared more than once.]
 
 -- check if these movies is really duplicated
 SELECT *
@@ -35,7 +35,7 @@ WHERE title IN (
      )
 )
 ORDER BY title;
--- [the result shows that only Jurassic Park III has quite the same detail.]
+-- [the result shows that only Jurassic Park III have quite the same detail.]
 
 -- After searching on the internet, the correct data might be the one with 5.9 rating so I will remove Jurassic Park III with movieid = 99
 DELETE FROM movies
