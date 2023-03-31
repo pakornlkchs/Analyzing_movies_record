@@ -1,5 +1,5 @@
 # SQL_movies_project
-I use data from public dataset in [data.world](https://data.world/jamesgaskin/movies)\
+Explore data from public dataset in [data.world](https://data.world/jamesgaskin/movies)\
 this dataset contains movies from 1989 to 2021
 
 5 questions to answer
