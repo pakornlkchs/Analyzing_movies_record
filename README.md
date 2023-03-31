@@ -12,4 +12,5 @@ this dataset contains movies from 1989 to 2021
 SQL skills used:
 - Aggregate functions
 - JOIN
+- Subqueries
 - Windows function
