@@ -6,7 +6,7 @@ this dataset contains movies from 1989 to 2021
 5 questions to answer
 - If I want to make a movie, what genre should I make and what rating should it be?
 - who has played in the most movie? and what is that movies?  
-- 
+- What is average run time for all movies
 -
 -
 
