@@ -53,7 +53,16 @@ WHERE movieid = 99;
 
 -- all data are cleaned, next step is exploratory data analysis
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 -- EDA
+-- What is the movie that has the most rating?
+SELECT 
+	title,
+    	genre,
+    	MAX(rating) AS max_rating
+FROM movies;
+
 -- What is the average run time for all movies?
 SELECT 
 	ROUND(AVG(runtime),2) AS average_runtime
@@ -67,6 +76,15 @@ FROM movies
 GROUP BY genre
 ORDER BY average_runtime;
 
+-- What are the most successful movies in a particular year?
+SELECT 
+	title,
+    	CAST(release_date AS DATE) AS year,
+    	MAX(gross) as total_income
+FROM movies
+GROUP BY year
+ORDER BY year;
+
 -- TOP 10 movies with the most profit
 SELECT
 	title,
@@ -75,11 +93,10 @@ FROM movies
 ORDER BY profit DESC
 LIMIT 10;
 
--- TOP 10 actors who played in the most movie
+-- TOP 10 actors who has the most participation in the movies
 SELECT 
 	a.name,
-    	COUNT(m.title) as number_of_movie_played,
-    	ROUND(AVG(rating),2) AS mean_rating
+    	COUNT(m.title) as number_of_movie_played
 FROM actor AS a
 Left JOIN character AS c 
 	ON a.actorid = c.actorid
@@ -90,14 +107,19 @@ ORDER BY number_of_movie_played DESC
 LIMIT 10;
 
 -- Who has played in movies the most? and what are that movies?
-SELECT 
-	a.name,
-	m.title,
-    	m.release_date,
-    	COUNT(m.title) OVER(PARTITION BY a.name) AS movies_played
-FROM actor AS a
-LEFT JOIN character AS c 
-	ON a.actorid = c.actorid
-LEFT JOIN movies as m
-	ON c.movieid = m.movieid
-ORDER BY movies_played DESC;
+WITH movie_play AS (
+	SELECT 
+		a.name,
+		m.title,
+    		m.release_date,
+    		COUNT(m.title) OVER(PARTITION BY a.name) AS movies_played
+	FROM actor AS a
+	LEFT JOIN character AS c 
+		ON a.actorid = c.actorid
+	LEFT JOIN movies as m
+		ON c.movieid = m.movieid
+)
+SELECT *
+FROM movie_play
+WHERE movies_played = (SELECT MAX(movies_played) FROM movie_play)
+ORDER BY release_date;
